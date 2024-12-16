@@ -1,0 +1,21 @@
+<h1>Total Results: <%= totalResults %></h1>
+<table>
+    <tr>
+        <th>CVE ID</th>
+        <th>Identifier</th>
+        <th>Published Date</th>
+        <th>Last Modified Date</th>
+        <th>Status</th>
+    </tr>
+    <% if (locals.data) { %>
+        <% data.forEach(x => { %>
+            <tr>
+                <td><%= x.cve.id %></td>
+                <td><%= x.cve.sourceIdentifier %></td>
+                <td><%= x.cve.published %></td>
+                <td><%= x.cve.lastModified %></td>
+                <td><%= x.cve.vulnStatus %></td>
+            </tr>
+        <% }); %>
+    <% } %>
+</table>

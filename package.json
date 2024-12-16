@@ -1,0 +1,26 @@
+{
+  "name": "securin",
+  "version": "1.0.0",
+  "description": "Securin Assessment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Akhil20K/Securin-Assessment.git"
+  },
+  "author": "Akhil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Akhil20K/Securin-Assessment/issues"
+  },
+  "homepage": "https://github.com/Akhil20K/Securin-Assessment#readme",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "body-parser": "^1.20.3",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2"
+  }
+}
