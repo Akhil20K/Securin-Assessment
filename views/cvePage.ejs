@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Securin Assessment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/css/pageStyle.css">
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
+</head>
+<% if(locals.data){ %>
+    <header>
+        <h3><%= data.id %></h3>
+        <div class="basic-details">
+            <div>Source Identifier: <%= data.sourceIdentifier %></div>
+            <div>Published: <%= data.published %></div>
+        </div>
+        <div class="basic-details">
+            <div>Last Modified: <%= data.lastModified %></div>
+            <div>Status: <%= data.vulnStatus %></div>
+        </div>
+    </header>
+    <h4>Description:</h4>
+    <div class="desp">
+        <%= data.descriptions[0].value %>
+    </div>
+    <h4>CVSS Metric V2:</h4>
+    <div class="metrics">
+        <div>Severity: <%= data.metrics.cvssMetricV2[0].baseSeverity %></div>
+        <div>Score: <%= data.metrics.cvssMetricV2[0].cvssData.baseScore %></div>
+        <div>Vector String: <%= data.metrics.cvssMetricV2[0].cvssData.vectorString %></div>
+    </div>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Access Vector</th>
+                    <th>Access Complexity</th>
+                    <th>Authentication</th>
+                    <th>Confidentiality Impact</th>
+                    <th>Integrity Impact</th>
+                    <th>Availability Impact</th>
+                </tr>
+            </thead>
+            <tr>
+                <td><%= data.metrics.cvssMetricV2[0].cvssData.accessVector %></td>
+                <td><%= data.metrics.cvssMetricV2[0].cvssData.accessComplexity %></td>
+                <td><%= data.metrics.cvssMetricV2[0].cvssData.authentication %></td>
+                <td><%= data.metrics.cvssMetricV2[0].cvssData.confidentialityImpact %></td>
+                <td><%= data.metrics.cvssMetricV2[0].cvssData.integrityImpact %></td>
+                <td><%= data.metrics.cvssMetricV2[0].cvssData.availabilityImpact %></td>
+            </tr>
+        </table>
+    </div>
+    <h4>Scores:</h4>
+    <div class="metrics">
+        <div>Exploitability Score: <%= data.metrics.cvssMetricV2[0].exploitabilityScore %></div>
+        <div>Impact Score: <%= data.metrics.cvssMetricV2[0].impactScore %></div>
+    </div>
+    <h4>CPE:</h4>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Criteria</th>
+                    <th>Match Criteria</th>
+                    <th>Vulnerable</th>
+                </tr>
+            </thead>
+            <% data.configurations[0].nodes[0].cpeMatch.forEach(x => { %>
+                <tr>
+                    <td><%= x.criteria %></td>
+                    <td><%= x.matchCriteriaId %></td>
+                    <td><%= x.vulnerable %></td>
+                </tr>
+            <% }) %>
+        </table>
+    </div>
+<% } %>

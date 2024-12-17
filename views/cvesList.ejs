@@ -1,21 +1,134 @@
-<h1>Total Results: <%= totalResults %></h1>
-<table>
-    <tr>
-        <th>CVE ID</th>
-        <th>Identifier</th>
-        <th>Published Date</th>
-        <th>Last Modified Date</th>
-        <th>Status</th>
-    </tr>
-    <% if (locals.data) { %>
-        <% data.forEach(x => { %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Securin Assessment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/listStyle.css">
+</head>
+
+<div class="head">
+    <h1>CVE LIST</h1>
+    <div class="cveid">
+        <input type="text" id="cve-id" placeholder="Enter CVE ID" />
+        <button onClick="handleClick(document.getElementById('cve-id').value);" class="button">
+            Search
+        </button>
+    </div>
+</div>
+<header>
+    <div>
+        <h3>Total Records : <%= totalResults %></h3>
+    </div>
+    <div>
+        <h3>Results Per Page: </h3>
+        <a href="/cves/list/10" class="rpp">10</a>
+        <a href="/cves/list/50" class="rpp">50</a>
+        <a href="/cves/list/100" class="rpp">100</a>
+    </div>
+    <div>
+        <h3>Results per page:  <%= pageSize %></h3>
+    </div>
+</header>
+
+<div class="table">
+    <table>
+        <thead>
             <tr>
-                <td><%= x.cve.id %></td>
-                <td><%= x.cve.sourceIdentifier %></td>
-                <td><%= x.cve.published %></td>
-                <td><%= x.cve.lastModified %></td>
-                <td><%= x.cve.vulnStatus %></td>
+                <th>CVE ID</th>
+                <th>Identifier</th>
+                <th>Published Date</th>
+                <th>Last Modified Date</th>
+                <th>Status</th>
             </tr>
-        <% }); %>
-    <% } %>
-</table>
+        </thead>
+        <% if (locals.data) { %>
+            <% data.forEach(x => { %>
+                <tr onClick="handleClick('<%=x.cve.id%>');">
+                    <td><%= x.cve.id %></td>
+                    <td><%= x.cve.sourceIdentifier %></td>
+                    <td><%= x.cve.published %></td>
+                    <td><%= x.cve.lastModified %></td>
+                    <td><%= x.cve.vulnStatus %></td>
+                </tr>
+            <% }); %>
+        <% } %>
+    </table>
+    <div class="box">
+        <button type="button" class="prev"><a href="#">Prev</a></button>
+        <ul class="ul"></ul>
+        <button type="button" class="next"><a href="#">Next</a></button>
+    </div>
+</div>
+<script>
+    // Send a GET request to the server once a row is clicked.
+    function handleClick(id){
+        var anchor = document.createElement("a");
+        anchor.href="/cve?id=" + id;
+        anchor.click();
+    }
+
+    // Send a request to render the Page
+    function handlePageClick(page_size, page){
+        var anchor = document.createElement("a");
+        anchor.href=`/cves/list/${page_size}/${page}`;
+        anchor.click();
+    }
+
+    // Pagenation
+    let page_size = "<%= pageSize %>";
+    let ul = document.querySelector(".ul");
+    let prev = document.querySelector(".prev");
+    let next = document.querySelector(".next");
+    let current_page = parseInt("<%= page %>");
+    let total_page = Math.ceil("<%= totalResults %> / <%= pageSize %>");
+    let active_page = "";
+    create_pages(current_page);
+    function create_pages(current_page){
+        ul.innerHTML = "";
+        let before_page = current_page - 2;
+        let after_page = current_page + 2;
+        if(current_page == 2){
+            before_page = current_page - 1;
+        }
+        if(current_page == 1){
+            before_page = current_page;
+        }
+        if(current_page == total_page - 1){
+            after_page = current_page + 1;
+        }
+        if(current_page == total_page){
+            after_page = current_page;
+        }
+        for(let i= before_page; i<= after_page; i++){
+            if(current_page == i){
+                active_page = "active_hover";
+            }
+            else{
+                active_page = "";
+            }
+            ul.innerHTML += `<li onclick="create_pages(${i})"><a href="/cves/list/${page_size}/${i}" class="page_number ${active_page}">${i}</a></li>`
+        }
+        prev.onclick = function(){
+            current_page--;
+            create_pages(current_page);
+        }
+        if(current_page <= 1){
+            prev.style.display = "none";
+        }
+        else{
+            prev.style.display = "block";
+        }
+        next.onclick = function(){
+            current_page++;
+            create_pages(current_page);
+        }
+        if(current_page >= total_page){
+            next.style.display = "none";
+        }
+        else{
+            next.style.display = "block";
+        }
+    }
+</script>

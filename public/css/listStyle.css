@@ -1,0 +1,160 @@
+*{
+    margin: 0;
+    border: 0;
+    background-color: #202e32;
+    background-image: url("https://www.transparenttextures.com/patterns/egg-shell.png");
+    font-family: "Chakra Petch", serif;
+    font-weight: 500;
+    font-style: normal;
+}
+.head {
+    display: flex;
+    color: #ffffff;
+    font-size: 50px;
+    background-color: transparent;;
+    justify-content: space-around;
+    gap: 50vh;
+}
+.rpp{
+    text-decoration: none;
+    margin: 5px;
+    background-color: black;
+    border-radius: 5px;
+    color: #ffffff;
+    padding: 5px;
+}
+header {
+    background-color: #85937a;
+    display: flex;
+    padding-left: 5px;
+    padding-right: 5px;
+    justify-content: space-around;
+    align-items: baseline;
+    border-radius: 10px;
+    width: 180vh;
+    margin-left: 90px;
+}
+header div{
+    background-color: #85937a;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.table{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    
+}
+table{
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5);
+    border: 2px solid black;
+    width: 190vh;
+    border-radius: 20px;
+    border-collapse: collapse;
+    text-align: center;
+    overflow: hidden;
+    border-width: 10px;
+}
+th{
+    font-size: 25px;
+    border: 1px solid black;
+    background-color: #586c5c;
+    font-weight: bolder;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+}
+td{
+    background-color: #a9af90;
+    border: 1px solid black;
+    padding: 1rem 2rem;
+    cursor: pointer;
+}
+h3{
+    background-color: #85937a;
+}
+.button {
+    border: none;
+    cursor: pointer;
+    padding: 20px;
+    background-color: #a9af90;
+    border-radius: 10px;
+    font-size: medium;
+}
+.button:hover {
+    opacity: 0.8;
+}
+input {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 20px;
+    border-radius: 10px;
+}
+input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+.cveid{
+    margin-top: 10px;
+}
+.box{
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 100px;
+    box-shadow: 0px 10px 30px -15px #000;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.box ul{
+    display: flex;
+    margin: 0px 10px;
+    background-color: transparent;
+}
+.box ul li{
+    background-color: transparent;
+    list-style: none;
+    margin: 0px 5px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 100px;
+    text-align: center;
+}
+.box ul li a{
+    font-size: 25px;
+    background-color: transparent;
+    text-decoration: none;
+    color: #000;
+    display: block;
+    border-radius: 100px;
+    transition: 0.2s;
+}
+.box ul li .active_hover{
+    background-color: #586c5c;
+    color: #ffffff;
+}
+.box ul li a:hover, .box button a:hover{
+    background-color: #586c5c;
+    color: #ffffff;
+}
+.box button{
+    overflow: hidden;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #f1f1f1;
+    border: none;
+    cursor: pointer;
+    border-radius: 100px;
+}
+.box button a{
+    background-color: transparent;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+    color: #000;
+    transition: 0.2s;
+    border-radius: 100px;
+}
